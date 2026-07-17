@@ -38,13 +38,17 @@
 
   function card(item, index) {
     const title = item.title || titleFromFile(item.file);
+    const sizePattern = ["small", "tall", "wide", "medium", "small", "large", "wide", "small", "medium", "tall", "small", "wide"];
+    const tiltPattern = ["tilt-left", "tilt-none", "tilt-right", "tilt-soft-left", "tilt-none", "tilt-soft-right"];
+    const sizeClass = item.type === "video" ? `size-${sizePattern[index % sizePattern.length]}` : "size-small work-photo";
+    const tiltClass = tiltPattern[index % tiltPattern.length];
     const preview = item.type === "image"
       ? `<img class="work-image" src="${escapeHtml(mediaUrl(item))}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">`
       : item.thumbnail
         ? `<img class="work-image" src="${escapeHtml(mediaUrl(item, "thumbnail"))}" alt="" loading="lazy" decoding="async">`
         : `<video class="work-preview" muted playsinline preload="metadata" data-preview-src="${escapeHtml(mediaUrl(item))}#t=0.1" aria-hidden="true"></video><div class="video-placeholder" aria-hidden="true"></div>`;
 
-    return `<article class="work" data-work-id="${escapeHtml(item.id)}">
+    return `<article class="work ${sizeClass} ${tiltClass}" data-work-id="${escapeHtml(item.id)}">
       <div class="work-visual">
         <button class="media-trigger" type="button" data-id="${escapeHtml(item.id)}" aria-label="${item.type === "video" ? "Play" : "Open"} ${escapeHtml(title)}">
           ${preview}<span class="work-type">${item.type === "video" ? "Film" : "Photo"}</span>
@@ -62,6 +66,28 @@
     count.textContent = String(shown.length);
     empty.hidden = shown.length > 0;
     observeVideoPreviews();
+  }
+
+  function renderAmbientImages() {
+    const collection = document.querySelector(".collection");
+    const images = state.items.filter((item) => item.type === "image");
+    const positions = [
+      [3, 2, 25, -8, 2], [72, 7, 22, 7, 4], [8, 22, 19, 5, 3],
+      [77, 31, 27, -6, 2], [1, 46, 24, 9, 5], [69, 57, 26, 5, 3],
+      [9, 69, 21, -7, 2], [75, 79, 20, 8, 4], [3, 91, 28, -5, 3]
+    ];
+    const existing = collection.querySelector(".ambient-gallery");
+    if (existing) existing.remove();
+    if (images.length === 0) return;
+
+    const layer = document.createElement("div");
+    layer.className = "ambient-gallery";
+    layer.setAttribute("aria-hidden", "true");
+    layer.innerHTML = images.slice(0, positions.length).map((item, index) => {
+      const [x, y, width, rotation, blur] = positions[index];
+      return `<img class="ambient-image" src="${escapeHtml(mediaUrl(item))}" alt="" loading="lazy" decoding="async" style="--ambient-x:${x}%;--ambient-y:${y}%;--ambient-width:${width}vw;--ambient-rotation:${rotation}deg;--ambient-blur:${blur}px">`;
+    }).join("");
+    collection.prepend(layer);
   }
 
   function observeVideoPreviews() {
@@ -167,6 +193,7 @@
       if (!configResponse.ok) throw new Error("The site configuration could not be loaded.");
       config = await configResponse.json();
       state.items = await loadCatalog();
+      renderAmbientImages();
       render();
       if (!config.blobBaseUrl || config.blobBaseUrl.includes("YOUR_ACCOUNT")) {
         showError("Setup needed: replace blobBaseUrl in config.json with your Azure container URL.");
