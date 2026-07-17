@@ -1,5 +1,5 @@
 {
-  "blobBaseUrl": "https://marketingdevwus2stor.blob.core.windows.net/video-ontent",
+  "blobBaseUrl": "https://marketingdevwus2stor.blob.core.windows.net/video-content",
   "sasToken": "",
   "catalogMode": "manifest",
   "includeFolders": ["instagram", "youtube"],
