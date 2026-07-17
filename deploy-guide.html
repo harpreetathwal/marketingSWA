@@ -9,9 +9,11 @@
   "sasToken": "",
   "catalogMode": "manifest",
   "includeFolders": ["instagram", "youtube"],
+  "videoPreviewFrames": true,
   "autoplayVideos": false
 }</pre>
 <p><code>manifest</code> mode uses the supplied 44-item <code>content.json</code>. Change <code>catalogMode</code> to <code>blob</code> to discover supported media automatically from Azure. Automatic mode requires container List access (or a SAS containing both Read and List permissions).</p>
+<p>When <code>videoPreviewFrames</code> is true, each video lazily loads a tiny range near its first frame to create a thumbnail-like preview. You can still provide a dedicated <code>thumbnail</code> filename in <code>content.json</code>; a real thumbnail is preferred when present.</p>
 <h2>5. Deploy the page</h2><p>Deploy this folder as the root of your Azure Static Web App. There is no build step. If using Azure DevOps or GitHub Actions, set the app location to the folder containing <code>index.html</code> and leave the output location empty.</p>
 <h2>6. Cache the heavy files</h2><p>On the Blob objects, use a long cache header such as <code>public, max-age=31536000, immutable</code> if file names never change. Keep the JSON catalog on a short cache policy so additions appear quickly. MP4 files should have <code>video/mp4</code> content type and support byte-range requests.</p>
 <h2>Adding future work</h2><p>Upload the new blob, then add an object to <code>content.json</code>. Optional <code>title</code> and <code>thumbnail</code> fields make the wall more descriptive. Video thumbnails can be small WebP or JPEG files stored beside their video.</p>

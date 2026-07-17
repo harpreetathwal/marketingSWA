@@ -38,25 +38,67 @@
 
   function card(item, index) {
     const title = item.title || titleFromFile(item.file);
-    const image = item.type === "image"
+    const preview = item.type === "image"
       ? `<img class="work-image" src="${escapeHtml(mediaUrl(item))}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">`
       : item.thumbnail
         ? `<img class="work-image" src="${escapeHtml(mediaUrl(item, "thumbnail"))}" alt="" loading="lazy" decoding="async">`
-        : `<div class="video-placeholder" aria-hidden="true"></div>`;
+        : `<video class="work-preview" muted playsinline preload="metadata" data-preview-src="${escapeHtml(mediaUrl(item))}#t=0.1" aria-hidden="true"></video><div class="video-placeholder" aria-hidden="true"></div>`;
 
-    return `<article class="work ${index % 4 === 0 ? "is-landscape" : ""}">
-      <button class="work-button" type="button" data-id="${escapeHtml(item.id)}" aria-label="Open ${escapeHtml(title)}">
-        <div class="work-visual">${image}<span class="work-type">${item.type === "video" ? "Film" : "Photo"}</span></div>
-        <div class="work-info"><span class="work-number">${String(index + 1).padStart(2, "0")}</span><h3 class="work-title">${escapeHtml(title)}</h3><span class="work-source">${escapeHtml(item.source)}</span></div>
-      </button>
+    return `<article class="work" data-work-id="${escapeHtml(item.id)}">
+      <div class="work-visual">
+        <button class="media-trigger" type="button" data-id="${escapeHtml(item.id)}" aria-label="${item.type === "video" ? "Play" : "Open"} ${escapeHtml(title)}">
+          ${preview}<span class="work-type">${item.type === "video" ? "Film" : "Photo"}</span>
+          ${item.type === "video" ? '<span class="play-badge" aria-hidden="true"></span>' : ""}
+        </button>
+      </div>
+      <div class="work-info"><span class="work-number">${String(index + 1).padStart(2, "0")}</span><h3 class="work-title">${escapeHtml(title)}</h3><span class="work-source">${escapeHtml(item.source)}</span></div>
     </article>`;
   }
 
   function render() {
+    pauseAllVideos();
     const shown = state.items.filter(matches);
     gallery.innerHTML = shown.map(card).join("");
     count.textContent = String(shown.length);
     empty.hidden = shown.length > 0;
+    observeVideoPreviews();
+  }
+
+  function observeVideoPreviews() {
+    const previews = gallery.querySelectorAll("video[data-preview-src]");
+    if (!config.videoPreviewFrames || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const video = entry.target;
+        video.src = video.dataset.previewSrc;
+        video.addEventListener("loadeddata", () => video.classList.add("is-ready"), { once: true });
+        currentObserver.unobserve(video);
+      });
+    }, { rootMargin: "250px 0px" });
+    previews.forEach((video) => observer.observe(video));
+  }
+
+  function pauseAllVideos(except) {
+    gallery.querySelectorAll("video.inline-player").forEach((video) => {
+      if (video !== except) video.pause();
+    });
+  }
+
+  function playInline(item, work) {
+    pauseAllVideos();
+    const frame = work.querySelector(".work-visual");
+    const video = document.createElement("video");
+    video.className = "inline-player";
+    video.src = mediaUrl(item);
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+    if (item.thumbnail) video.poster = mediaUrl(item, "thumbnail");
+    video.addEventListener("play", () => pauseAllVideos(video));
+    frame.replaceChildren(video);
+    video.play().catch(() => {});
   }
 
   function openViewer(item) {
@@ -66,21 +108,10 @@
     document.querySelector("#viewer-number").textContent = String(position).padStart(2, "0");
     document.querySelector("#viewer-source").textContent = item.source;
     document.querySelector("#viewer-details").textContent = [item.date, formatBytes(item.bytes)].filter(Boolean).join(" · ");
-    if (item.type === "video") {
-      const video = document.createElement("video");
-      video.src = mediaUrl(item);
-      video.controls = true;
-      video.autoplay = Boolean(config.autoplayVideos);
-      video.playsInline = true;
-      video.preload = "metadata";
-      if (item.thumbnail) video.poster = mediaUrl(item, "thumbnail");
-      stage.replaceChildren(video);
-    } else {
-      const image = document.createElement("img");
-      image.src = mediaUrl(item);
-      image.alt = title;
-      stage.replaceChildren(image);
-    }
+    const image = document.createElement("img");
+    image.src = mediaUrl(item);
+    image.alt = title;
+    stage.replaceChildren(image);
     viewer.showModal();
     document.body.classList.add("viewer-open");
   }
@@ -155,7 +186,9 @@
     const button = event.target.closest("[data-id]");
     if (!button) return;
     const item = state.items.find((entry) => entry.id === button.dataset.id);
-    if (item) openViewer(item);
+    if (!item) return;
+    if (item.type === "video") playInline(item, button.closest(".work"));
+    else openViewer(item);
   });
   document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
     document.querySelectorAll(".filter").forEach((entry) => { entry.classList.remove("is-active"); entry.setAttribute("aria-pressed", "false"); });

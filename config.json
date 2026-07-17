@@ -3,5 +3,6 @@
   "sasToken": "",
   "catalogMode": "manifest",
   "includeFolders": ["instagram", "youtube"],
+  "videoPreviewFrames": true,
   "autoplayVideos": false
 }

@@ -4,8 +4,8 @@
     "Referrer-Policy": "strict-origin-when-cross-origin"
   },
   "routes": [
-    { "route": "/styles.css", "headers": { "Cache-Control": "public, max-age=604800" } },
-    { "route": "/app.js", "headers": { "Cache-Control": "public, max-age=604800" } },
+    { "route": "/styles.css", "headers": { "Cache-Control": "no-cache" } },
+    { "route": "/app.js", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/config.json", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/content.json", "headers": { "Cache-Control": "no-cache" } }
   ],
