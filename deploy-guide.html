@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Content Museum — Azure setup</title><link rel="stylesheet" href="styles.css"><style>main{max-width:850px;margin:auto;padding:7vw 5vw}.guide{font:1.1rem/1.7 var(--serif)}h1{font:400 clamp(3rem,8vw,6rem)/.9 var(--serif)}h2{margin-top:3rem;font:400 2rem var(--serif)}pre,code{background:var(--paper-deep);padding:.15em .35em}pre{padding:1rem;overflow:auto;font:14px/1.5 monospace}li{margin:.8rem 0}.back{display:inline-block;margin-top:3rem}</style></head>
+<body><main><p class="eyebrow">Deployment notes</p><h1>Put the museum<br><em>on view.</em></h1><div class="guide">
+<h2>1. Upload your media</h2><p>Keep two virtual folders in your Blob container: <code>instagram/</code> and <code>youtube/</code>. Upload the local files into their matching folder. The names in <code>content.json</code> already match your directory listing.</p>
+<h2>2. Allow browser access</h2><p>In the storage account’s Resource sharing (CORS) settings for Blob service, add the URL of your Static Web App as an allowed origin. Allow the <code>GET</code> and <code>HEAD</code> methods, the <code>Range</code> request header, and expose <code>Content-Length</code>, <code>Content-Range</code>, and <code>Accept-Ranges</code>. Set a max age such as 86400 seconds.</p>
+<h2>3. Choose access</h2><p>The simplest public-gallery setup is anonymous read access on this one media container. If the archive must remain private, place a read-only container SAS in <code>config.json</code>; use a long-lived token only if you accept that anyone who can view the page can also see and reuse it. For stronger private access, a static-only site needs an external proxy or edge authorization layer.</p>
+<h2>4. Point the catalog at Azure</h2><p>Open <code>config.json</code> and replace the placeholder with your container URL:</p><pre>{
+  "blobBaseUrl": "https://ACCOUNT.blob.core.windows.net/CONTAINER",
+  "sasToken": "",
+  "catalogMode": "manifest",
+  "includeFolders": ["instagram", "youtube"],
+  "autoplayVideos": false
+}</pre>
+<p><code>manifest</code> mode uses the supplied 44-item <code>content.json</code>. Change <code>catalogMode</code> to <code>blob</code> to discover supported media automatically from Azure. Automatic mode requires container List access (or a SAS containing both Read and List permissions).</p>
+<h2>5. Deploy the page</h2><p>Deploy this folder as the root of your Azure Static Web App. There is no build step. If using Azure DevOps or GitHub Actions, set the app location to the folder containing <code>index.html</code> and leave the output location empty.</p>
+<h2>6. Cache the heavy files</h2><p>On the Blob objects, use a long cache header such as <code>public, max-age=31536000, immutable</code> if file names never change. Keep the JSON catalog on a short cache policy so additions appear quickly. MP4 files should have <code>video/mp4</code> content type and support byte-range requests.</p>
+<h2>Adding future work</h2><p>Upload the new blob, then add an object to <code>content.json</code>. Optional <code>title</code> and <code>thumbnail</code> fields make the wall more descriptive. Video thumbnails can be small WebP or JPEG files stored beside their video.</p>
+</div><a class="back" href="index.html">← Return to the museum</a></main></body></html>
