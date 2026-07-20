@@ -17,23 +17,32 @@
     <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
   </header>
 
-  <main class="subpage-main" id="main">
-    <div>
-      <p class="subpage-kicker">01 / Work together</p>
-      <h1>Make your next idea <em>impossible to miss.</em></h1>
-    </div>
-    <div class="subpage-copy">
-      <p>For founders, teams, and people with a sharp idea that needs a sharper point of view. Bring the ambition—I’ll help shape how it looks, moves, and lands.</p>
-      <ul class="subpage-list">
-        <li>Creative direction</li>
-        <li>Campaign content</li>
-        <li>Digital experiences</li>
-        <li>Photo and video stories</li>
-      </ul>
-      <div class="subpage-actions">
-        <a class="button-primary" href="contact.html">Start a conversation</a>
-        <a class="button-secondary" href="gallery.html">See the work</a>
-      </div>
+  <main class="ad-series-main" id="main">
+    <header class="ad-series-heading">
+      <p class="subpage-kicker">Choose an ad series</p>
+      <h1>Pick your format.</h1>
+    </header>
+
+    <div class="ad-series-grid">
+      <a class="series-card" href="#hire-form-title" data-series="DONXT (Video Ad Series)">
+        <video class="series-video" autoplay muted loop playsinline preload="metadata" poster="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash-thumbnail.png" aria-hidden="true">
+          <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash.webm" type="video/webm">
+          <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash.mp4" type="video/mp4">
+        </video>
+        <span class="series-shade" aria-hidden="true"></span>
+        <span class="series-card-title">DONXT <small>(Video Ad Series)</small></span>
+        <span class="series-card-action">Select series <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="series-card" href="#hire-form-title" data-series="Magic Printer (Video Ad Series)">
+        <video class="series-video" autoplay muted loop playsinline preload="metadata" poster="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash-thumbnail.png" aria-hidden="true">
+          <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash.webm" type="video/webm">
+          <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/donxt_splash.mp4" type="video/mp4">
+        </video>
+        <span class="series-shade" aria-hidden="true"></span>
+        <span class="series-card-title">Magic Printer <small>(Video Ad Series)</small></span>
+        <span class="series-card-action">Select series <span aria-hidden="true">&rarr;</span></span>
+      </a>
     </div>
   </main>
 
@@ -41,10 +50,12 @@
     <div class="inquiry-intro">
       <p class="subpage-kicker">Start the brief</p>
       <h2 id="hire-form-title">What are we making?</h2>
+      <p class="series-selection" id="series-selection" aria-live="polite">Choose a series above, or describe something entirely new.</p>
       <p>Share the shape of the project, even if it is still rough. The useful details are the goal, timing, and what success should feel like.</p>
     </div>
     <form class="inquiry-form" data-inquiry-form>
       <input type="hidden" name="formType" value="hire">
+      <input type="hidden" name="subject" id="selected-series" value="">
       <label class="form-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       <div class="form-grid">
         <label class="form-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" maxlength="160" required></label>

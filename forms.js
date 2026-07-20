@@ -80,4 +80,21 @@
       }
     });
   });
+
+  const selectedSeries = document.querySelector("#selected-series");
+  const seriesSelection = document.querySelector("#series-selection");
+  document.querySelectorAll("[data-series]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const series = card.dataset.series || "";
+      if (selectedSeries) selectedSeries.value = series;
+      if (seriesSelection) seriesSelection.textContent = `Selected: ${series}`;
+      document.querySelectorAll("[data-series]").forEach((entry) => {
+        entry.classList.toggle("is-selected", entry === card);
+      });
+    });
+  });
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll("video[autoplay]").forEach((video) => video.pause());
+  }
 })();
