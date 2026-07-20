@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe6">
+  <meta name="description" content="Open a conversation about a project, internship, or creative collaboration.">
+  <title>Collaborate | Start a Conversation</title>
+  <link rel="stylesheet" href="landing.css">
+  <script src="forms.js" defer></script>
+</head>
+<body class="subpage">
+  <a class="a11y-skip" href="#main">Skip to main content</a>
+  <header class="landing-header">
+    <a class="landing-logo" href="index.html" aria-label="The Content Museum, home">CM<span>®</span></a>
+    <p class="availability"><span></span> Open to good ideas</p>
+    <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="subpage-main" id="main">
+    <div>
+      <p class="subpage-kicker">04 / The wildcard</p>
+      <h1>Bring the idea that feels <em>a little impossible.</em></h1>
+    </div>
+    <div class="subpage-copy">
+      <p>A collaboration, an experiment, a cultural project, or something without a neat category—this is the door for it.</p>
+      <ul class="subpage-list">
+        <li>What you want to make</li>
+        <li>Who it needs to reach</li>
+        <li>When it needs to exist</li>
+        <li>Why it matters now</li>
+      </ul>
+      <div class="subpage-actions">
+        <a class="button-primary" href="hire.html">Plan a project</a>
+        <a class="button-secondary" href="index.html">Back home</a>
+      </div>
+    </div>
+  </main>
+
+  <section class="inquiry-section" aria-labelledby="collab-form-title">
+    <div class="inquiry-intro">
+      <p class="subpage-kicker">Open the conversation</p>
+      <h2 id="collab-form-title">Put the strange idea on the table.</h2>
+      <p>It does not need to fit a service list. Say what it is, why it should exist, and where you think we could take it together.</p>
+    </div>
+    <form class="inquiry-form" data-inquiry-form>
+      <input type="hidden" name="formType" value="collaboration">
+      <label class="form-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="form-grid">
+        <label class="form-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" maxlength="160" required></label>
+        <label class="form-field"><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="320" required></label>
+        <label class="form-field"><span>Company / collective</span><input type="text" name="company" autocomplete="organization" maxlength="200"></label>
+        <label class="form-field"><span>Subject</span><input type="text" name="subject" maxlength="200"></label>
+        <label class="form-field form-field--wide"><span>What are you imagining? *</span><textarea name="message" rows="6" minlength="10" maxlength="5000" required></textarea></label>
+      </div>
+      <div class="form-submit-row">
+        <button class="form-submit" type="submit">Send the idea <span aria-hidden="true">↗</span></button>
+        <p class="form-privacy">Submitting records your form details, IP address, time, browser, and basic device metadata for follow-up and abuse prevention.</p>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</body>
+</html>

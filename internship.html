@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe6">
+  <meta name="description" content="An internship for curious people who want to learn by making.">
+  <title>Internship | Learn by Making</title>
+  <link rel="stylesheet" href="landing.css">
+  <script src="forms.js" defer></script>
+</head>
+<body class="subpage">
+  <a class="a11y-skip" href="#main">Skip to main content</a>
+  <header class="landing-header">
+    <a class="landing-logo" href="index.html" aria-label="The Content Museum, home">CM<span>®</span></a>
+    <p class="availability"><span></span> Future creative talent</p>
+    <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="subpage-main" id="main">
+    <div>
+      <p class="subpage-kicker">03 / Learn together</p>
+      <h1>Learn by making <em>real things.</em></h1>
+    </div>
+    <div class="subpage-copy">
+      <p>This is for curious self-starters who want a close look at how ideas become finished creative work. Taste matters. Reliability matters more. A willingness to try matters most.</p>
+      <ul class="subpage-list">
+        <li>Creative research</li>
+        <li>Content production</li>
+        <li>Editing and publishing</li>
+        <li>Portfolio development</li>
+      </ul>
+      <div class="subpage-actions">
+        <a class="button-primary" href="contact.html">Introduce yourself</a>
+        <a class="button-secondary" href="index.html">Back home</a>
+      </div>
+    </div>
+  </main>
+
+  <section class="inquiry-section" aria-labelledby="intern-form-title">
+    <div class="inquiry-intro">
+      <p class="subpage-kicker">Make your introduction</p>
+      <h2 id="intern-form-title">Show me how you think.</h2>
+      <p>A polished résumé is optional. Curiosity, follow-through, and a link to something you have made are much more interesting.</p>
+    </div>
+    <form class="inquiry-form" data-inquiry-form>
+      <input type="hidden" name="formType" value="internship">
+      <label class="form-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="form-grid">
+        <label class="form-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" maxlength="160" required></label>
+        <label class="form-field"><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="320" required></label>
+        <label class="form-field"><span>Portfolio / work link</span><input type="url" name="portfolio" autocomplete="url" maxlength="500" placeholder="https://"></label>
+        <label class="form-field"><span>Availability</span><input type="text" name="availability" maxlength="160" placeholder="Dates, hours, and time zone"></label>
+        <label class="form-field form-field--wide"><span>Why this internship? *</span><textarea name="message" rows="6" minlength="10" maxlength="5000" required></textarea></label>
+      </div>
+      <div class="form-submit-row">
+        <button class="form-submit" type="submit">Send introduction <span aria-hidden="true">↗</span></button>
+        <p class="form-privacy">Submitting records your form details, IP address, time, browser, and basic device metadata for follow-up and abuse prevention.</p>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</body>
+</html>

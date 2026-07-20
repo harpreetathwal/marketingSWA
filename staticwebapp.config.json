@@ -6,6 +6,9 @@
   "routes": [
     { "route": "/styles.css", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/app.js", "headers": { "Cache-Control": "no-cache" } },
+    { "route": "/landing.css", "headers": { "Cache-Control": "no-cache" } },
+    { "route": "/landing.js", "headers": { "Cache-Control": "no-cache" } },
+    { "route": "/forms.js", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/config.json", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/content.json", "headers": { "Cache-Control": "no-cache" } }
   ],

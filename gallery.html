@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171613">
+  <meta name="description" content="A living archive of film and photography.">
+  <title>Gallery | The Content Museum</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#collection">Skip to collection</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="Return to the home page">
+      <span class="wordmark-mark">CM</span>
+      <span>The Content Museum</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="museum-nav">Menu</button>
+    <nav id="museum-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="#collection">Collection</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-kicker"><span>Digital archive</span><span>Est. 2025</span></div>
+      <h1 id="hero-title">Stories,<br><em>preserved in motion.</em></h1>
+      <div class="hero-footer">
+        <p>A living collection of films and photographs—gathered from Instagram and YouTube, arranged as a place to wander.</p>
+        <a class="round-link" href="#collection" aria-label="Enter the collection"><span>Enter</span><span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The collection</p>
+          <h2 id="collection-title">On view</h2>
+        </div>
+        <p class="collection-count" aria-live="polite"><span id="visible-count">0</span> works</p>
+      </div>
+
+      <div class="controls" aria-label="Collection controls">
+        <div class="filter-row" role="group" aria-label="Filter by collection">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="instagram" aria-pressed="false">Instagram</button>
+          <button class="filter" type="button" data-filter="youtube" aria-pressed="false">YouTube</button>
+          <button class="filter" type="button" data-filter="image" aria-pressed="false">Photography</button>
+          <button class="filter" type="button" data-filter="video" aria-pressed="false">Film</button>
+        </div>
+        <label class="search-label">
+          <span class="sr-only">Search the collection</span>
+          <input id="search" type="search" placeholder="Search the archive" autocomplete="off">
+          <span aria-hidden="true">⌕</span>
+        </label>
+      </div>
+
+      <div id="gallery" class="gallery" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <p>No works found.</p>
+        <button type="button" id="reset-filters">Reset the collection</button>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <p class="eyebrow">About the archive</p>
+      <div>
+        <h2 id="about-title">A room without walls.</h2>
+        <p>This collection is designed to grow. Add a file to Azure Blob Storage, add one entry to <code>content.json</code>, and a new work takes its place on the wall.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> The Content Museum</p>
+    <a href="#top">Return to entrance ↑</a>
+  </footer>
+
+  <dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-bar">
+      <div><span id="viewer-number"></span><h2 id="viewer-title"></h2></div>
+      <button id="close-viewer" class="close-button" type="button" aria-label="Close viewer">Close <span aria-hidden="true">×</span></button>
+    </div>
+    <div id="viewer-stage" class="viewer-stage"></div>
+    <div class="viewer-meta">
+      <p id="viewer-source"></p>
+      <p id="viewer-details"></p>
+    </div>
+  </dialog>
+
+  <div id="load-error" class="toast" role="alert" hidden></div>
+</body>
+</html>

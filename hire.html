@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe6">
+  <meta name="description" content="Start a creative project and make work people remember.">
+  <title>Hire Me | Creative Direction</title>
+  <link rel="stylesheet" href="landing.css">
+  <script src="forms.js" defer></script>
+</head>
+<body class="subpage">
+  <a class="a11y-skip" href="#main">Skip to main content</a>
+  <header class="landing-header">
+    <a class="landing-logo" href="index.html" aria-label="The Content Museum, home">CM<span>®</span></a>
+    <p class="availability"><span></span> Project inquiries</p>
+    <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="subpage-main" id="main">
+    <div>
+      <p class="subpage-kicker">01 / Work together</p>
+      <h1>Make your next idea <em>impossible to miss.</em></h1>
+    </div>
+    <div class="subpage-copy">
+      <p>For founders, teams, and people with a sharp idea that needs a sharper point of view. Bring the ambition—I’ll help shape how it looks, moves, and lands.</p>
+      <ul class="subpage-list">
+        <li>Creative direction</li>
+        <li>Campaign content</li>
+        <li>Digital experiences</li>
+        <li>Photo and video stories</li>
+      </ul>
+      <div class="subpage-actions">
+        <a class="button-primary" href="contact.html">Start a conversation</a>
+        <a class="button-secondary" href="gallery.html">See the work</a>
+      </div>
+    </div>
+  </main>
+
+  <section class="inquiry-section" aria-labelledby="hire-form-title">
+    <div class="inquiry-intro">
+      <p class="subpage-kicker">Start the brief</p>
+      <h2 id="hire-form-title">What are we making?</h2>
+      <p>Share the shape of the project, even if it is still rough. The useful details are the goal, timing, and what success should feel like.</p>
+    </div>
+    <form class="inquiry-form" data-inquiry-form>
+      <input type="hidden" name="formType" value="hire">
+      <label class="form-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="form-grid">
+        <label class="form-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" maxlength="160" required></label>
+        <label class="form-field"><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="320" required></label>
+        <label class="form-field"><span>Company / team</span><input type="text" name="company" autocomplete="organization" maxlength="200"></label>
+        <label class="form-field"><span>Estimated budget</span><select name="budget"><option value="">Select a range</option><option>Under $5,000</option><option>$5,000–$15,000</option><option>$15,000–$50,000</option><option>$50,000+</option><option>Let's discuss</option></select></label>
+        <label class="form-field form-field--wide"><span>Ideal timeline</span><input type="text" name="timeline" maxlength="120" placeholder="For example: launch in October"></label>
+        <label class="form-field form-field--wide"><span>Tell me about the project *</span><textarea name="message" rows="6" minlength="10" maxlength="5000" required></textarea></label>
+      </div>
+      <div class="form-submit-row">
+        <button class="form-submit" type="submit">Send project inquiry <span aria-hidden="true">↗</span></button>
+        <p class="form-privacy">Submitting records your form details, IP address, time, browser, and basic device metadata for follow-up and abuse prevention.</p>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</body>
+</html>

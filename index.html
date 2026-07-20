@@ -1,96 +1,90 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="splash-active">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171613">
-  <meta name="description" content="A living archive of film and photography.">
-  <title>The Content Museum</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <meta name="theme-color" content="#0a0a09">
+  <meta name="description" content="Creative direction, visual storytelling, and new ways to work together.">
+  <title>Make Something Unforgettable</title>
+  <link rel="stylesheet" href="landing.css">
+  <script src="landing.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#collection">Skip to collection</a>
+  <div class="splash" id="splash" role="dialog" aria-label="Intro film" aria-modal="true">
+    <video id="splash-video" class="splash-video" autoplay muted playsinline preload="auto" aria-label="Introduction video">
+      <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/splash.webm" type="video/webm">
+      <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/splash.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="splash-shade" aria-hidden="true"></div>
+    <div class="splash-brand" aria-hidden="true"><span>Creative</span><span>Direction</span></div>
+    <p class="splash-hint">Click anywhere to enter</p>
+    <button class="skip-video" id="skip-video" type="button">Skip video <span aria-hidden="true">↗</span></button>
+    <div class="splash-progress" aria-hidden="true"><span></span></div>
+  </div>
 
-  <header class="site-header">
-    <a class="wordmark" href="#top" aria-label="The Content Museum, home">
-      <span class="wordmark-mark">CM</span>
-      <span>The Content Museum</span>
-    </a>
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="museum-nav">Menu</button>
-    <nav id="museum-nav" aria-label="Primary navigation">
-      <a href="#collection">Collection</a>
-      <a href="#about">About</a>
-    </nav>
-  </header>
+  <div class="landing" id="landing" aria-hidden="true">
+    <a class="a11y-skip" href="#opportunities">Skip to opportunities</a>
+    <header class="landing-header">
+      <a class="landing-logo" href="index.html" aria-label="The Content Museum, home">CM<span>®</span></a>
+      <p class="availability"><span></span> Available for select work</p>
+      <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
+    </header>
 
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-kicker"><span>Digital archive</span><span>Est. 2025</span></div>
-      <h1 id="hero-title">Stories,<br><em>preserved in motion.</em></h1>
-      <div class="hero-footer">
-        <p>A living collection of films and photographs—gathered from Instagram and YouTube, arranged as a place to wander.</p>
-        <a class="round-link" href="#collection" aria-label="Enter the collection"><span>Enter</span><span aria-hidden="true">↓</span></a>
-      </div>
-    </section>
-
-    <section class="collection" id="collection" aria-labelledby="collection-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">The collection</p>
-          <h2 id="collection-title">On view</h2>
+    <main>
+      <section class="landing-hero" aria-labelledby="landing-title">
+        <p class="hero-index">Independent creative / digital storyteller</p>
+        <h1 id="landing-title"><span>Ideas that</span><span>refuse to be</span><em>ignored.</em></h1>
+        <div class="hero-bottom">
+          <p>I turn raw ideas into visual stories, digital experiences, and work that earns attention.</p>
+          <a href="#opportunities" class="discover-link">Choose your path <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="collection-count" aria-live="polite"><span id="visible-count">0</span> works</p>
-      </div>
+        <div class="hero-orbit" aria-hidden="true"><span>Play · Make · Move · Repeat · </span></div>
+      </section>
 
-      <div class="controls" aria-label="Collection controls">
-        <div class="filter-row" role="group" aria-label="Filter by collection">
-          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="instagram" aria-pressed="false">Instagram</button>
-          <button class="filter" type="button" data-filter="youtube" aria-pressed="false">YouTube</button>
-          <button class="filter" type="button" data-filter="image" aria-pressed="false">Photography</button>
-          <button class="filter" type="button" data-filter="video" aria-pressed="false">Film</button>
+      <section class="opportunities" id="opportunities" aria-labelledby="opportunities-title">
+        <div class="opportunities-heading">
+          <p>Start here</p>
+          <h2 id="opportunities-title">What brings<br>you here?</h2>
+          <span>Pick one. Let's make it count.</span>
         </div>
-        <label class="search-label">
-          <span class="sr-only">Search the collection</span>
-          <input id="search" type="search" placeholder="Search the archive" autocomplete="off">
-          <span aria-hidden="true">⌕</span>
-        </label>
-      </div>
 
-      <div id="gallery" class="gallery" aria-live="polite"></div>
-      <div id="empty-state" class="empty-state" hidden>
-        <p>No works found.</p>
-        <button type="button" id="reset-filters">Reset the collection</button>
-      </div>
-    </section>
+        <div class="path-grid">
+          <a class="path-card path-card--hire" href="hire.html">
+            <span class="card-number">01</span>
+            <span class="card-kicker">For teams &amp; founders</span>
+            <strong>I want to<br>hire you.</strong>
+            <span class="card-footer"><span>Start a project</span><span class="card-arrow" aria-hidden="true">↗</span></span>
+          </a>
 
-    <section class="about" id="about" aria-labelledby="about-title">
-      <p class="eyebrow">About the archive</p>
-      <div>
-        <h2 id="about-title">A room without walls.</h2>
-        <p>This collection is designed to grow. Add a file to Azure Blob Storage, add one entry to <code>content.json</code>, and a new work takes its place on the wall.</p>
-      </div>
-    </section>
-  </main>
+          <a class="path-card path-card--gallery" href="gallery.html">
+            <span class="card-number">02</span>
+            <span class="card-kicker">Selected work</span>
+            <strong>I want to review<br>your gallery.</strong>
+            <span class="card-footer"><span>Enter the archive</span><span class="card-arrow" aria-hidden="true">↗</span></span>
+          </a>
 
-  <footer>
-    <p>© <span id="year"></span> The Content Museum</p>
-    <a href="#top">Return to entrance ↑</a>
-  </footer>
+          <a class="path-card path-card--intern" href="internship.html">
+            <span class="card-number">03</span>
+            <span class="card-kicker">Learn by making</span>
+            <strong>I want an<br>internship.</strong>
+            <span class="card-footer"><span>See the opportunity</span><span class="card-arrow" aria-hidden="true">↗</span></span>
+          </a>
 
-  <dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
-    <div class="viewer-bar">
-      <div><span id="viewer-number"></span><h2 id="viewer-title"></h2></div>
-      <button id="close-viewer" class="close-button" type="button" aria-label="Close viewer">Close <span aria-hidden="true">×</span></button>
-    </div>
-    <div id="viewer-stage" class="viewer-stage"></div>
-    <div class="viewer-meta">
-      <p id="viewer-source"></p>
-      <p id="viewer-details"></p>
-    </div>
-  </dialog>
+          <a class="path-card path-card--collab" href="contact.html">
+            <span class="card-number">04</span>
+            <span class="card-kicker">Something unexpected</span>
+            <strong>Let's<br>collaborate.</strong>
+            <span class="card-footer"><span>Open a conversation</span><span class="card-arrow" aria-hidden="true">↗</span></span>
+          </a>
+        </div>
+      </section>
+    </main>
 
-  <div id="load-error" class="toast" role="alert" hidden></div>
+    <footer class="landing-footer">
+      <p>Built for people with something to say.</p>
+      <p>© <span data-year></span> — All good things start with a conversation.</p>
+    </footer>
+  </div>
 </body>
 </html>

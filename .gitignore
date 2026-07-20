@@ -1,0 +1,5 @@
+api/local.settings.json
+api/node_modules/
+api/.func/
+api/*.zip
+npm-debug.log*

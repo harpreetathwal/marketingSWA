@@ -199,7 +199,7 @@
         showError("Setup needed: replace blobBaseUrl in config.json with your Azure container URL.");
       }
     } catch (error) {
-      showError(`${error.message} Serve this folder through a web server instead of opening index.html directly.`);
+      showError(`${error.message} Serve this folder through a web server instead of opening gallery.html directly.`);
     }
   }
 
