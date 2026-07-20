@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Infini";
+  src: url("assets/fonts/infini-regular.woff") format("woff");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root {
   --ink: #171613;
   --paper: #f1ede3;
@@ -5,12 +13,13 @@
   --oxblood: #77352d;
   --muted: #6b675e;
   --line: rgba(23, 22, 19, .2);
-  --serif: Georgia, "Times New Roman", serif;
-  --sans: Arial, Helvetica, sans-serif;
+  --serif: "Infini", sans-serif;
+  --sans: "Infini", sans-serif;
   color-scheme: light;
 }
 
 * { box-sizing: border-box; }
+body, body *, body *::before, body *::after { font-family: "Infini", sans-serif !important; font-style: normal !important; font-weight: 400 !important; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
 body.viewer-open { overflow: hidden; }

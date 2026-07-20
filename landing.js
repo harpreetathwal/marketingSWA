@@ -9,12 +9,59 @@
   let revealTimer;
   let loadGuard;
   let hasEntered = false;
+  let subtitlesStarted = false;
 
-  document.querySelectorAll("[data-year]").forEach((element) => {
-    element.textContent = String(new Date().getFullYear());
-  });
+  const subtitleGroups = [
+    {
+      element: document.querySelector("#ad-subtitle"),
+      items: [
+        "Make Me Unforgettable",
+        "Make My Competitors Nervous",
+        "Let's Make Magic",
+        "Let's Make Something Viral",
+        "Get More Customers",
+        "Give Me an Ad Series",
+        "This Is Exactly What I Need",
+        "Let's Make My Competitors Sweat",
+        "Let's Become Unskippable",
+        "Make My Brand the Main Character"
+      ]
+    },
+    {
+      element: document.querySelector("#internship-subtitle"),
+      items: [
+        "I Want to Learn Video Editing",
+        "I Want to Learn VFX",
+        "I Want to Learn Ad Copy",
+        "I Want to Get Paid"
+      ]
+    }
+  ];
 
   if (!splash || !landing || !video) return;
+
+  function startSubtitleRotations() {
+    if (subtitlesStarted) return;
+    subtitlesStarted = true;
+
+    subtitleGroups.forEach(({ element, items }, groupIndex) => {
+      if (!element || items.length === 0) return;
+      let currentIndex = Math.floor(Math.random() * items.length);
+      element.textContent = items[currentIndex];
+
+      if (reducedMotion) return;
+      window.setInterval(() => {
+        let nextIndex = currentIndex;
+        while (nextIndex === currentIndex) nextIndex = Math.floor(Math.random() * items.length);
+        currentIndex = nextIndex;
+        element.classList.add("is-changing");
+        window.setTimeout(() => {
+          element.textContent = items[currentIndex];
+          element.classList.remove("is-changing");
+        }, 180);
+      }, 3200 + (groupIndex * 350));
+    });
+  }
 
   function enterSite() {
     if (hasEntered) return;
@@ -25,6 +72,7 @@
     splash.classList.add("is-exiting");
     landing.setAttribute("aria-hidden", "false");
     landing.classList.add("is-ready");
+    startSubtitleRotations();
     document.documentElement.classList.remove("splash-active");
     window.setTimeout(() => {
       splash.hidden = true;

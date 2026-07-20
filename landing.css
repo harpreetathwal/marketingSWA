@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Infini";
+  src: url("assets/fonts/infini-regular.woff") format("woff");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root {
   --night: #0a0a09;
   --night-soft: #151513;
@@ -7,8 +15,8 @@
   --acid: #d8ff45;
   --line-dark: rgba(242, 239, 230, .18);
   --line-light: rgba(10, 10, 9, .18);
-  --display: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-  --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: "Infini", sans-serif;
+  --body: "Infini", sans-serif;
   color-scheme: dark;
 }
 
@@ -20,6 +28,8 @@ a { color: inherit; }
 button, input, textarea, select { font: inherit; }
 button { color: inherit; }
 ::selection { background: var(--signal); color: var(--night); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+body, body *, body *::before, body *::after { font-family: "Infini", sans-serif !important; font-style: normal !important; font-weight: 400 !important; }
 
 .a11y-skip {
   position: fixed;
@@ -111,6 +121,56 @@ button { color: inherit; }
   transition: opacity .75s .18s, transform .9s .18s cubic-bezier(.16, 1, .3, 1), visibility 0s .18s;
 }
 .landing.is-ready { opacity: 1; visibility: visible; transform: none; }
+
+.simple-landing {
+  min-height: 100svh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  background: #cdbb9f;
+  color: #29231c;
+}
+.option-grid {
+  width: min(1180px, 100%);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+.option-card {
+  position: relative;
+  min-height: clamp(230px, 35vh, 360px);
+  overflow: hidden;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(72, 55, 36, .08);
+  border-radius: 12px;
+  background: #f3ede2;
+  color: #29231c;
+  text-decoration: none;
+  box-shadow: 0 22px 48px rgba(66, 48, 28, .18), 0 3px 8px rgba(66, 48, 28, .1);
+  transition: transform .24s ease, box-shadow .24s ease, background .24s ease;
+}
+.option-card:nth-child(2) { background: #e9dfcf; }
+.option-card:nth-child(3) { background: #efe6d8; }
+.option-card:nth-child(4) { background: #e1d3bd; }
+.option-card:hover, .option-card:focus-visible {
+  z-index: 2;
+  outline: none;
+  transform: translateY(-5px);
+  background: #faf7f0;
+  box-shadow: 0 30px 64px rgba(66, 48, 28, .24), 0 5px 12px rgba(66, 48, 28, .12);
+}
+.option-card:focus-visible { box-shadow: 0 0 0 4px #29231c, 0 30px 64px rgba(66, 48, 28, .24); }
+.option-title { max-width: 90%; font-size: clamp(2.4rem, 5vw, 5.2rem); line-height: .95; letter-spacing: -.035em; }
+.option-subtitle { min-height: 1.5em; margin-top: 1.2rem; color: #74634e; font-size: clamp(.95rem, 1.5vw, 1.2rem); line-height: 1.35; transition: opacity .18s ease, transform .18s ease; }
+.option-subtitle.is-changing { opacity: 0; transform: translateY(5px); }
+.option-arrow { position: absolute; right: clamp(1.3rem, 2.5vw, 2.3rem); bottom: clamp(1.2rem, 2.5vw, 2rem); font-size: clamp(1.5rem, 2.5vw, 2.4rem); transition: transform .24s ease; }
+.option-card:hover .option-arrow, .option-card:focus-visible .option-arrow { transform: translateX(6px); }
+.font-credit { margin: 0; color: rgba(41, 35, 28, .62); text-align: right; font-size: .7rem; }
 .landing-header {
   position: absolute;
   z-index: 10;
@@ -372,6 +432,12 @@ button { color: inherit; }
   .form-field--wide { grid-column: auto; }
   .form-submit-row { align-items: flex-start; flex-direction: column; }
   .form-submit { width: 100%; }
+  .simple-landing { padding: 1rem; }
+  .option-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .option-card { min-height: 190px; padding: 1.5rem; }
+  .option-title { max-width: 85%; font-size: clamp(2.5rem, 13vw, 4rem); }
+  .option-subtitle { max-width: 80%; margin-top: .8rem; font-size: .95rem; }
+  .font-credit { padding-top: .25rem; font-size: .6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
