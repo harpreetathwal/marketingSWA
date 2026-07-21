@@ -4,48 +4,54 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#171613">
-  <meta name="description" content="A living archive of film and photography.">
-  <title>Gallery | The Content Museum</title>
+  <meta name="description" content="Explore the HWRoom gallery: selected film, photography, and visual storytelling.">
+  <meta name="application-name" content="HWRoom">
+  <meta property="og:site_name" content="HWRoom">
+  <title>Gallery | HWRoom</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#collection">Skip to collection</a>
+  <a class="skip-link" href="#collection">Skip to selected work</a>
 
   <header class="site-header">
-    <a class="wordmark" href="index.html" aria-label="Return to the home page">
-      <span class="wordmark-mark">CM</span>
-      <span>The Content Museum</span>
+    <a class="wordmark" href="index.html" aria-label="HWRoom, home">
+      <img class="wordmark-mark" src="assets/hwroomlogo.jpg" alt="">
+      <span class="wordmark-copy"><strong>HWRoom</strong><small>Humpback Whale Room</small></span>
     </a>
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="museum-nav">Menu</button>
-    <nav id="museum-nav" aria-label="Primary navigation">
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
       <a href="index.html">Home</a>
-      <a href="#collection">Collection</a>
+      <a href="#collection" aria-current="page">Work</a>
       <a href="#about">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-kicker"><span>Digital archive</span><span>Est. 2025</span></div>
-      <h1 id="hero-title">Stories,<br><em>preserved in motion.</em></h1>
-      <div class="hero-footer">
-        <p>A living collection of films and photographs—gathered from Instagram and YouTube, arranged as a place to wander.</p>
-        <a class="round-link" href="#collection" aria-label="Enter the collection"><span>Enter</span><span aria-hidden="true">↓</span></a>
+      <div class="hero-kicker"><span>HWRoom / Selected work</span><span>Film + Photography</span></div>
+      <div class="hero-main">
+        <h1 id="hero-title">Stories that<br><em>move.</em></h1>
+        <div class="hero-intro">
+          <p>Campaign films, visual experiments, and images made to hold attention and stay remembered.</p>
+          <a class="hero-link" href="#collection">View selected work <span aria-hidden="true">&darr;</span></a>
+        </div>
       </div>
     </section>
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">The collection</p>
-          <h2 id="collection-title">On view</h2>
+          <p class="eyebrow">Portfolio</p>
+          <h2 id="collection-title">Selected work</h2>
         </div>
         <p class="collection-count" aria-live="polite"><span id="visible-count">0</span> works</p>
       </div>
 
-      <div class="controls" aria-label="Collection controls">
-        <div class="filter-row" role="group" aria-label="Filter by collection">
+      <div class="controls" aria-label="Portfolio controls">
+        <div class="filter-row" role="group" aria-label="Filter selected work">
           <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
           <button class="filter" type="button" data-filter="instagram" aria-pressed="false">Instagram</button>
           <button class="filter" type="button" data-filter="youtube" aria-pressed="false">YouTube</button>
@@ -53,37 +59,39 @@
           <button class="filter" type="button" data-filter="video" aria-pressed="false">Film</button>
         </div>
         <label class="search-label">
-          <span class="sr-only">Search the collection</span>
-          <input id="search" type="search" placeholder="Search the archive" autocomplete="off">
-          <span aria-hidden="true">⌕</span>
+          <span class="sr-only">Search selected work</span>
+          <input id="search" type="search" placeholder="Search projects" autocomplete="off">
+          <span aria-hidden="true">Search</span>
         </label>
       </div>
 
+      <p class="gallery-status" id="gallery-status" role="status">Loading selected work&hellip;</p>
       <div id="gallery" class="gallery" aria-live="polite"></div>
       <div id="empty-state" class="empty-state" hidden>
-        <p>No works found.</p>
-        <button type="button" id="reset-filters">Reset the collection</button>
+        <p>No projects match those filters.</p>
+        <button type="button" id="reset-filters">Show all work</button>
       </div>
     </section>
 
     <section class="about" id="about" aria-labelledby="about-title">
-      <p class="eyebrow">About the archive</p>
+      <p class="eyebrow">About HWRoom</p>
       <div>
-        <h2 id="about-title">A room without walls.</h2>
-        <p>This collection is designed to grow. Add a file to Azure Blob Storage, add one entry to <code>content.json</code>, and a new work takes its place on the wall.</p>
+        <h2 id="about-title">A room for ideas with scale.</h2>
+        <p>HWRoom stands for Humpback Whale Room: an independent creative space for ambitious video, visual storytelling, and work that deserves a bigger presence.</p>
+        <a class="about-link" href="contact.html">Start a project <span aria-hidden="true">&rarr;</span></a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> The Content Museum</p>
-    <a href="#top">Return to entrance ↑</a>
+    <p>&copy; <span id="year"></span> HWRoom / Humpback Whale Room</p>
+    <div class="footer-links"><a href="contact.html">Contact</a><a href="#top">Back to top &uarr;</a></div>
   </footer>
 
   <dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
     <div class="viewer-bar">
       <div><span id="viewer-number"></span><h2 id="viewer-title"></h2></div>
-      <button id="close-viewer" class="close-button" type="button" aria-label="Close viewer">Close <span aria-hidden="true">×</span></button>
+      <button id="close-viewer" class="close-button" type="button" aria-label="Close viewer">Close <span aria-hidden="true">&times;</span></button>
     </div>
     <div id="viewer-stage" class="viewer-stage"></div>
     <div class="viewer-meta">

@@ -83,16 +83,26 @@
 
   const selectedSeries = document.querySelector("#selected-series");
   const seriesSelection = document.querySelector("#series-selection");
-  document.querySelectorAll("[data-series]").forEach((card) => {
+  const seriesCards = Array.from(document.querySelectorAll("[data-series]"));
+
+  function selectSeries(series, selectedCard) {
+    if (selectedSeries) selectedSeries.value = series;
+    if (seriesSelection) seriesSelection.textContent = `Selected: ${series}`;
+    seriesCards.forEach((entry) => entry.classList.toggle("is-selected", entry === selectedCard));
+  }
+
+  seriesCards.forEach((card) => {
     card.addEventListener("click", () => {
       const series = card.dataset.series || "";
-      if (selectedSeries) selectedSeries.value = series;
-      if (seriesSelection) seriesSelection.textContent = `Selected: ${series}`;
-      document.querySelectorAll("[data-series]").forEach((entry) => {
-        entry.classList.toggle("is-selected", entry === card);
-      });
+      selectSeries(series, card);
     });
   });
+
+  const requestedSeries = new URLSearchParams(window.location.search).get("series");
+  if (requestedSeries) {
+    const selectedCard = seriesCards.find((card) => card.dataset.series === requestedSeries);
+    if (selectedCard) selectSeries(requestedSeries, selectedCard);
+  }
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.querySelectorAll("video[autoplay]").forEach((video) => video.pause());

@@ -5,6 +5,7 @@
   const video = document.querySelector("#splash-video");
   const skipButton = document.querySelector("#skip-video");
   const landing = document.querySelector("#landing");
+  const landingSeriesVideos = document.querySelectorAll(".landing-series-video");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let revealTimer;
   let loadGuard;
@@ -73,6 +74,9 @@
     landing.setAttribute("aria-hidden", "false");
     landing.classList.add("is-ready");
     startSubtitleRotations();
+    if (!reducedMotion) {
+      landingSeriesVideos.forEach((seriesVideo) => seriesVideo.play().catch(() => {}));
+    }
     document.documentElement.classList.remove("splash-active");
     window.setTimeout(() => {
       splash.hidden = true;
