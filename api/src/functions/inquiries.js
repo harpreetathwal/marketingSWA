@@ -18,6 +18,7 @@ const FIELD_LIMITS = Object.freeze({
   timeline: 120,
   portfolio: 500,
   availability: 160,
+  smsConsent: 10,
   message: 5000
 });
 const CLIENT_METADATA_LIMITS = Object.freeze({
@@ -106,6 +107,7 @@ function validatePayload(payload) {
   for (const [field, limit] of Object.entries(FIELD_LIMITS)) {
     fields[field] = cleanString(payload[field], limit);
   }
+  fields.smsConsent = fields.smsConsent.toLowerCase() === "yes" ? "yes" : "";
 
   if (!fields.name) errors.name = "Your name is required.";
   if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {

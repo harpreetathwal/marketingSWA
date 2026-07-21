@@ -68,6 +68,8 @@ test("builds a typed entity with server and client metadata", () => {
     formType: "internship",
     name: "A User",
     email: "user@example.com",
+    phone: "+1 555 010 0200",
+    smsConsent: "yes",
     message: "I would like to learn through real project work.",
     clientMetadata: { timeZone: "America/Los_Angeles", viewportWidth: 1440 }
   });
@@ -77,6 +79,8 @@ test("builds a typed entity with server and client metadata", () => {
   assert.match(entity.rowKey, /^[0-9a-f-]{36}$/);
   assert.ok(entity.submittedAtUtc instanceof Date);
   assert.equal(entity.clientIp, "203.0.113.42");
+  assert.equal(entity.phone, "+1 555 010 0200");
+  assert.equal(entity.smsConsent, "yes");
   assert.equal(entity.client_timeZone, "America/Los_Angeles");
   assert.equal(entity.client_viewportWidth, 1440);
 });
