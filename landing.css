@@ -174,14 +174,18 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
 .home-brand > span { display: grid; gap: .2rem; }
 .home-brand strong { letter-spacing: -.03em; font-size: 1.15rem; line-height: 1; }
 .home-brand small { color: #74634e; text-transform: uppercase; letter-spacing: .14em; font-size: .48rem; }
-.landing-series-grid { width: 100%; }
-.simple-landing .landing-series-grid .series-card {
-  min-height: clamp(240px, 30vw, 410px);
-}
+.landing-intro { padding: clamp(1.25rem, 2.5vw, 2.25rem) 0; display: grid; grid-template-columns: minmax(220px, .65fr) minmax(0, 1.35fr); gap: clamp(1rem, 4vw, 4rem); align-items: end; border-top: 1px solid rgba(72,55,36,.15); border-bottom: 1px solid rgba(72,55,36,.15); }
+.landing-intro h1 { margin: 0; font-size: clamp(2.4rem, 5.2vw, 5rem); line-height: .85; letter-spacing: -.055em; }
+.landing-intro-subtitle { margin: 0; color: #74634e; font-size: clamp(1rem, 1.7vw, 1.35rem); line-height: 1.35; transition: opacity .18s ease, transform .18s ease; }
+.landing-intro-subtitle.is-changing { opacity: 0; transform: translateY(5px); }
+.landing-series-grid { width: 100%; align-items: start; }
+.landing-series-item { min-width: 0; display: grid; gap: clamp(.85rem, 1.5vw, 1.25rem); }
+.landing-series-description { min-height: 4.5em; margin: 0; color: #554a3d; font-size: clamp(.82rem, 1.15vw, 1rem); line-height: 1.5; }
+.landing-series-description em { color: #a14730; }
 .option-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(.65rem, 1.2vw, 1rem);
 }
 .option-card {
@@ -199,9 +203,9 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
   box-shadow: 0 22px 48px rgba(66, 48, 28, .18), 0 3px 8px rgba(66, 48, 28, .1);
   transition: transform .24s ease, box-shadow .24s ease, background .24s ease;
 }
-.option-card:nth-child(2) { background: #e9dfcf; }
-.option-card:nth-child(3) { background: #efe6d8; }
-.option-card:nth-child(4) { background: #e1d3bd; }
+.option-card:nth-child(1) { background: #e9dfcf; }
+.option-card:nth-child(2) { background: #efe6d8; }
+.option-card:nth-child(3) { background: #e1d3bd; }
 .option-card:hover, .option-card:focus-visible {
   z-index: 2;
   outline: none;
@@ -400,7 +404,10 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
 .ad-series-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(1rem, 2.4vw, 2rem); align-items: stretch; }
 .series-card {
   position: relative;
-  min-height: clamp(320px, 48vw, 570px);
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  display: block;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.24);
   border-radius: 14px;
@@ -505,8 +512,7 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
 .form-status.is-error { color: #ff9b84; }
 
 @media (max-width: 850px) {
-  .option-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .simple-landing .landing-series-grid .series-card { min-height: min(52vw, 400px); }
+  .option-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .landing-header { grid-template-columns: 1fr 1fr; }
   .availability { display: none; }
   .landing-hero { min-height: max(680px, 100svh); }
@@ -523,7 +529,8 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
   .ad-series-main { min-height: auto; }
   .ad-series-heading { align-items: start; flex-direction: column; gap: .5rem; }
   .ad-series-grid { grid-template-columns: 1fr; }
-  .series-card { min-height: min(68vw, 480px); }
+  .series-card { min-height: 0; }
+  .landing-series-description { min-height: 0; }
 }
 
 @media (max-width: 620px) {
@@ -558,16 +565,17 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
   .form-submit { width: 100%; }
   .simple-landing { padding: 1rem; }
   .home-brand img { width: 46px; height: 46px; }
+  .landing-intro { grid-template-columns: 1fr; gap: .8rem; }
+  .landing-intro h1 { font-size: clamp(2.5rem, 13vw, 4rem); }
   .option-grid { grid-template-columns: 1fr; gap: 1rem; }
   .option-card { min-height: 125px; padding: 1rem; grid-template-rows: 1fr auto; }
   .option-title { max-width: 100%; font-size: clamp(1.25rem, 6.4vw, 1.7rem); }
   .option-footer { padding-top: .75rem; }
   .option-subtitle { max-width: none; margin: 0; font-size: clamp(.62rem, 3.1vw, .78rem); }
   .font-credit { padding-top: .25rem; font-size: .6rem; }
-  .simple-landing .landing-series-grid .series-card { min-height: 250px; }
   .ad-series-main { min-height: calc(100svh - 68px); padding: 2rem 1rem 3rem; }
   .ad-series-heading h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
-  .series-card { min-height: 250px; }
+  .series-card { min-height: 0; }
   .series-card-title { font-size: clamp(.95rem, 5.2vw, 1.35rem); }
 }
 
