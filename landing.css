@@ -517,6 +517,7 @@ body, body *, body *::before, body *::after { font-family: "Infini", sans-serif 
   font-size: .58rem;
 }
 .series-card-action span { font-size: 1.2rem; transition: transform .25s; }
+.series-card-action em { color: #ffcf70; font-style: italic !important; text-transform: none; }
 .series-card:hover .series-card-action span, .series-card:focus-visible .series-card-action span { transform: translateX(5px); }
 .series-selection { margin: 0 0 1rem !important; color: var(--signal); font-size: .82rem !important; }
 
