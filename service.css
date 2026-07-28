@@ -19,6 +19,29 @@ body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Inf
 button, a { font: inherit; }
 a { color: inherit; }
 
+.site-header {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  min-height: 82px;
+  padding: 0 clamp(1.2rem, 4vw, 3.6rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(18px);
+}
+.wordmark { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+.wordmark-mark { width: 92px; height: auto; display: block; padding: 3px 5px; object-fit: contain; }
+.wordmark-copy { display: block; white-space: nowrap; }
+.wordmark-copy strong { font-size: .9rem; letter-spacing: -.02em; }
+.site-header nav { display: flex; align-items: center; gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+.site-header nav a { position: relative; padding: .6rem 0; color: inherit; text-transform: uppercase; letter-spacing: .14em; text-decoration: none; font-size: .61rem; }
+.site-header nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: .2rem; height: 1px; background: currentColor; transition: right .2s ease; }
+.site-header nav a:hover::after, .site-header nav a:focus-visible::after, .site-header nav a[aria-current="page"]::after { right: 0; }
+.menu-button { display: none; border: 0; padding: .6rem 0; background: none; color: inherit; text-transform: uppercase; letter-spacing: .13em; font-size: .62rem; cursor: pointer; }
+
 .service-header {
   min-height: 82px;
   padding: 0 clamp(1.2rem, 4vw, 3.6rem);
@@ -101,6 +124,21 @@ a { color: inherit; }
   box-shadow: 0 18px 44px rgba(45,34,22,.16);
 }
 .video-card figcaption { padding: .85rem .1rem 0; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: .56rem; }
+.service-gallery-link {
+  width: max-content;
+  margin: clamp(2.5rem, 4vw, 3.5rem) 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  color: var(--ink);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: .62rem;
+}
+.service-gallery-link span { font-size: 1.15rem; transition: transform .2s ease; }
+.service-gallery-link:hover, .service-gallery-link:focus-visible { outline: none; text-decoration: underline; text-underline-offset: .4rem; }
+.service-gallery-link:hover span, .service-gallery-link:focus-visible span { transform: translateX(4px); }
 
 .service-cta { padding: clamp(5rem, 9vw, 9rem) 1.2rem; display: grid; place-items: center; text-align: center; }
 .service-cta p { max-width: 620px; margin: 0 0 1.5rem; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.6; }
@@ -121,7 +159,59 @@ a { color: inherit; }
 }
 .service-cta a:hover, .service-cta a:focus-visible { background: var(--gold); color: var(--ink); outline: none; }
 
+/* DONXT is intentionally arranged as a desktop one-pager. */
+.service-page--compact .site-header { min-height: 66px; }
+.service-page--compact .service-hero {
+  min-height: 0;
+  padding: clamp(2.25rem, 4vw, 3.75rem) 1.2rem;
+  border-bottom: 0;
+}
+.service-page--compact .service-hero h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); }
+.service-page--compact .service-kicker { margin-bottom: .65rem; }
+.service-page--compact .service-description { padding: clamp(1.5rem, 2.5vw, 2.5rem) 0; }
+.service-page--compact .service-description p { padding-top: .7rem; font-size: clamp(.88rem, 1vw, 1rem); line-height: 1.45; }
+.service-page--compact .service-work { padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.2rem, 4vw, 3.6rem); }
+.service-page--compact .service-work-heading { margin-bottom: clamp(.9rem, 1.6vw, 1.3rem); }
+.service-page--compact .service-work-heading h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); }
+.service-page--compact .carousel-button { width: 38px; height: 38px; }
+.service-page--compact .service-gallery-link { margin-top: clamp(1rem, 1.8vw, 1.5rem); }
+.service-page--compact .service-cta { padding: clamp(1.5rem, 2.5vw, 2.5rem) 1.2rem; }
+.service-page--compact .service-cta p { margin-bottom: .8rem; font-size: .95rem; }
+.service-page--compact .service-cta a { min-width: 0; padding: .8rem 1.15rem; }
+.service-page--compact .service-cta--intro { padding-top: 0; padding-bottom: clamp(1rem, 1.8vw, 1.5rem); }
+
+.about-hero {
+  min-height: min(670px, calc(100svh - 82px));
+  padding: clamp(5rem, 11vw, 11rem) clamp(1.2rem, 12vw, 12rem);
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  background: #fff;
+}
+.about-hero h1 { max-width: 900px; margin: 0; font-size: clamp(4.5rem, 9vw, 9rem); line-height: .8; letter-spacing: -.07em; }
+.about-hero h1 em { color: var(--gold); }
+.about-hero > p:last-child { max-width: 730px; margin: clamp(2rem, 4vw, 3.5rem) 0 0; color: #514a40; font-size: clamp(1.1rem, 1.65vw, 1.42rem); line-height: 1.5; }
+.founders { padding: clamp(4rem, 8vw, 8rem) clamp(1.2rem, 4vw, 3.6rem); background: var(--warm); }
+.founders-heading { width: min(1200px, 100%); margin: 0 auto clamp(2rem, 4vw, 4rem); }
+.founders-heading h2 { margin: 0; font-size: clamp(3rem, 6vw, 6rem); line-height: .85; letter-spacing: -.06em; }
+.founder-grid { width: min(1200px, 100%); margin: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2.5rem); }
+.founder-card { min-width: 0; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid rgba(33,30,25,.15); background: rgba(255,255,255,.55); }
+.profile-placeholder { aspect-ratio: 4 / 5; display: grid; place-content: center; gap: .8rem; border: 1px dashed rgba(33,30,25,.35); background: linear-gradient(145deg, #fffdf8, #e8decd); text-align: center; }
+.profile-placeholder span { font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.08em; }
+.profile-placeholder small, .founder-number { margin: 0; color: var(--muted); text-transform: uppercase; letter-spacing: .15em; font-size: .56rem; }
+.founder-number { margin-top: 1.25rem; }
+.founder-card h3 { margin: .55rem 0 .65rem; font-size: clamp(1.4rem, 2vw, 1.85rem); letter-spacing: -.04em; }
+.founder-card > p:not(.founder-number) { min-height: 4.5em; margin: 0; color: #5b544a; line-height: 1.5; }
+.bio-placeholder { display: inline-flex; gap: .55rem; margin-top: 1.5rem; color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: .56rem; pointer-events: none; }
+
 @media (max-width: 760px) {
+  .site-header { min-height: 68px; }
+  .wordmark-mark { width: 76px; }
+  .wordmark-copy strong { font-size: .78rem; }
+  .menu-button { display: block; }
+  .site-header nav { display: none; position: absolute; left: 0; right: 0; top: 68px; padding: 1.4rem; flex-direction: column; align-items: flex-start; gap: .5rem; border-bottom: 1px solid var(--line); background: #fff; }
+  .site-header nav.is-open { display: flex; }
+  .site-header nav a { width: 100%; padding: .7rem 0; }
   .service-header { min-height: 68px; }
   .service-wordmark img { width: 76px; }
   .service-wordmark strong { font-size: .78rem; }
@@ -129,6 +219,13 @@ a { color: inherit; }
   .service-hero h1 { font-size: clamp(3.5rem, 17vw, 6rem); }
   .service-description { grid-template-columns: 1fr; }
   .video-track { grid-auto-columns: 100%; }
+  .service-page--compact .service-hero,
+  .service-page--compact .service-description,
+  .service-page--compact .service-work,
+  .service-page--compact .service-cta { padding-top: 3rem; padding-bottom: 3rem; }
+  .service-page--compact .service-description { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .about-hero { min-height: 0; padding: 5rem 1.2rem; }
+  .founder-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

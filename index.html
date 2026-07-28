@@ -30,9 +30,15 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="image_src" href="https://www.sunstreakstudios.com/assets/social-preview.png?v=20260727">
   <link rel="stylesheet" href="landing.css">
+  <script src="site-nav.js" defer></script>
   <script src="landing.js" defer></script>
 </head>
 <body>
+  <header class="site-header universal-nav">
+    <a class="wordmark" href="index.html" aria-label="Sun Streak Studios, home"><span class="brand-mark"><img class="wordmark-mark" src="assets/logo_wide.png" alt=""></span><span class="wordmark-copy"><strong>Sun Streak Studios</strong></span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation"><a href="index.html" aria-current="page">Home</a><a href="donxt.html">DonXt Ads</a><a href="traditional-advertising.html">Traditional Ads</a><a href="about.html">About</a><a href="contact.html">Contact Us</a></nav>
+  </header>
   <div class="splash" id="splash" role="dialog" aria-label="Intro film" aria-modal="true">
     <video id="splash-video" class="splash-video" autoplay muted playsinline preload="auto" aria-label="Introduction video">
       <source src="https://marketingdevwus2stor.blob.core.windows.net/video-content/hiring/splash.webm" type="video/webm">
@@ -40,10 +46,6 @@
       Your browser does not support the video tag.
     </video>
     <div class="splash-shade" aria-hidden="true"></div>
-    <div class="splash-brand" aria-hidden="true">
-      <div class="brand-mark"><img src="assets/logo_wide.png" alt=""></div>
-      <span><strong>Sun Streak Studios</strong></span>
-    </div>
     <p class="splash-hint">Click anywhere to enter</p>
     <button class="skip-video" id="skip-video" type="button">Skip video <span aria-hidden="true">↗</span></button>
     <div class="splash-progress" aria-hidden="true"><span></span></div>
@@ -52,11 +54,6 @@
   <div class="landing" id="landing" aria-hidden="true">
     <main class="simple-landing" id="options">
       <div class="landing-content">
-        <div class="home-brand" aria-label="Sun Streak Studios">
-          <div class="brand-mark"><img src="assets/logo_wide.png" alt=""></div>
-          <span><strong>Sun Streak Studios</strong></span>
-        </div>
-
         <header class="landing-intro">
           <h1><span>I Want a</span><span>Creative Ad</span></h1>
           <p class="landing-intro-subtitle" id="ad-subtitle" data-rotating-subtitle>Make Me Unforgettable</p>
@@ -74,7 +71,7 @@
                 </video>
                 <span class="series-shade" aria-hidden="true"></span>
                 <span class="series-card-title">DONXT <small>(Video Ad Series)</small></span>
-                <span class="series-card-action">Make a <em>DonXt</em> for my brand! <span aria-hidden="true">&rarr;</span></span>
+                <span class="series-card-action"><span class="series-card-action-copy">Make a <em>DonXt</em> for my brand!</span><span class="series-card-action-arrow" aria-hidden="true">&rarr;</span></span>
               </a>
             </article>
 
@@ -87,7 +84,7 @@
                 </video>
                 <span class="series-shade" aria-hidden="true"></span>
                 <span class="series-card-title">Traditional Advertising</span>
-                <span class="series-card-action">Explore Traditional Advertising <span aria-hidden="true">&rarr;</span></span>
+                <span class="series-card-action"><span class="series-card-action-copy">Explore Traditional Advertising</span><span class="series-card-action-arrow" aria-hidden="true">&rarr;</span></span>
               </a>
             </article>
           </div>

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f2efe6">
-  <meta name="description" content="Contact Sun Streak Studios about a video project, internship, or creative collaboration.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Schedule a conversation with Sun Streak Studios about your next video campaign.">
   <meta name="application-name" content="Sun Streak Studios">
   <meta property="og:site_name" content="Sun Streak Studios">
-  <meta property="og:title" content="Contact Sun Streak Studios | Start a Conversation">
-  <meta property="og:description" content="Contact Sun Streak Studios about a video project, internship, or creative collaboration.">
+  <meta property="og:title" content="Schedule a Meeting | Sun Streak Studios">
+  <meta property="og:description" content="Schedule a conversation with Sun Streak Studios about your next video campaign.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.sunstreakstudios.com/assets/social-preview.png?v=20260727">
   <meta property="og:image:type" content="image/png">
@@ -16,11 +16,11 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Sun Streak Studios logo">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Contact Sun Streak Studios | Start a Conversation">
-  <meta name="twitter:description" content="Contact Sun Streak Studios about a video project, internship, or creative collaboration.">
+  <meta name="twitter:title" content="Schedule a Meeting | Sun Streak Studios">
+  <meta name="twitter:description" content="Schedule a conversation with Sun Streak Studios about your next video campaign.">
   <meta name="twitter:image" content="https://www.sunstreakstudios.com/assets/social-preview.png?v=20260727">
   <meta name="twitter:image:alt" content="Sun Streak Studios logo">
-  <title>Contact Sun Streak Studios | Start a Conversation</title>
+  <title>Schedule a Meeting | Sun Streak Studios</title>
   <link rel="canonical" href="https://www.sunstreakstudios.com/contact.html">
   <meta property="og:url" content="https://www.sunstreakstudios.com/contact.html">
   <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
@@ -30,58 +30,50 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <link rel="image_src" href="https://www.sunstreakstudios.com/assets/social-preview.png?v=20260727">
   <link rel="stylesheet" href="landing.css">
+  <script src="site-nav.js" defer></script>
   <script src="forms.js" defer></script>
+  <script src="schedule-calendar.js" defer></script>
 </head>
 <body class="subpage">
   <a class="a11y-skip" href="#main">Skip to main content</a>
-  <header class="landing-header">
-    <a class="landing-logo" href="index.html" aria-label="Sun Streak Studios, home"><img src="assets/logo_wide.png" alt=""><span class="landing-logo-copy"><strong>Sun Streak Studios</strong></span></a>
-    <p class="availability"><span></span> Open to good ideas</p>
-    <a class="header-gallery" href="gallery.html">View gallery <span aria-hidden="true">↗</span></a>
+  <header class="site-header universal-nav">
+    <a class="wordmark" href="index.html" aria-label="Sun Streak Studios, home"><span class="brand-mark"><img class="wordmark-mark" src="assets/logo_wide.png" alt=""></span><span class="wordmark-copy"><strong>Sun Streak Studios</strong></span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="donxt.html">DonXt Ads</a><a href="traditional-advertising.html">Traditional Ads</a><a href="about.html">About</a><a href="contact.html" aria-current="page">Contact Us</a></nav>
   </header>
 
-  <main class="subpage-main" id="main">
-    <div>
-      <p class="subpage-kicker">04 / The wildcard</p>
-      <h1>Bring the idea that feels <em>a little impossible.</em></h1>
-    </div>
-    <div class="subpage-copy">
-      <p>A collaboration, an experiment, a cultural project, or something without a neat category—this is the door for it.</p>
-      <ul class="subpage-list">
-        <li>What you want to make</li>
-        <li>Who it needs to reach</li>
-        <li>When it needs to exist</li>
-        <li>Why it matters now</li>
-      </ul>
-      <div class="subpage-actions">
-        <a class="button-primary" href="hire.html">Plan a project</a>
-        <a class="button-secondary" href="index.html">Back home</a>
-      </div>
-    </div>
-  </main>
-
-  <section class="inquiry-section" aria-labelledby="collab-form-title">
+  <main id="main" class="schedule-main">
+    <section class="inquiry-section schedule-form-section" aria-labelledby="schedule-form-title">
     <div class="inquiry-intro">
-      <p class="subpage-kicker">Open the conversation</p>
-      <h2 id="collab-form-title">Put the strange idea on the table.</h2>
-      <p>It does not need to fit a service list. Say what it is, why it should exist, and where you think we could take it together.</p>
+      <p class="subpage-kicker">Contact Sun Streak Studios</p>
+      <h2 id="schedule-form-title">Share your contact to access our calendar and book time.</h2>
     </div>
-    <form class="inquiry-form" data-inquiry-form>
-      <input type="hidden" name="formType" value="collaboration">
+    <form class="inquiry-form" data-inquiry-form data-reveal-on-complete="#calendar-section" data-success-message="Thanks—your details have been saved. Choose a time below to complete your booking.">
+      <input type="hidden" name="formType" value="meeting">
       <label class="form-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       <div class="form-grid">
         <label class="form-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" maxlength="160" required></label>
-        <label class="form-field"><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="320" required></label>
-        <label class="form-field"><span>Company / collective</span><input type="text" name="company" autocomplete="organization" maxlength="200"></label>
-        <label class="form-field"><span>Subject</span><input type="text" name="subject" maxlength="200"></label>
-        <label class="form-field form-field--wide"><span>What are you imagining? *</span><textarea name="message" rows="6" minlength="10" maxlength="5000" required></textarea></label>
+        <label class="form-field"><span>Company name *</span><input type="text" name="company" autocomplete="organization" maxlength="200" required></label>
+        <label class="form-field"><span>Contact email *</span><input type="email" name="email" autocomplete="email" maxlength="320" required></label>
+        <label class="form-consent"><input type="checkbox" name="termsConsent" value="yes" required><span>I agree to the <a href="#submission-terms">terms and conditions</a>, including Sun Streak Studios storing these submitted details and related submission metadata to respond to my request.</span></label>
       </div>
       <div class="form-submit-row">
-        <button class="form-submit" type="submit">Send the idea <span aria-hidden="true">↗</span></button>
-        <p class="form-privacy">Submitting records your form details, IP address, time, browser, and basic device metadata for follow-up and abuse prevention.</p>
+        <button class="form-submit" type="submit">Continue to calendar <span aria-hidden="true">↗</span></button>
+        <p class="form-privacy">Your company, email, consent, and basic submission metadata are stored for scheduling, follow-up, and abuse prevention.</p>
       </div>
       <p class="form-status" data-form-status role="status" aria-live="polite"></p>
     </form>
-  </section>
+    </section>
+
+    <section class="calendar-section" id="calendar-section" hidden aria-labelledby="calendar-title" tabindex="-1">
+      <div class="calendar-heading"><p class="subpage-kicker">Step 2 of 2</p><h2 id="calendar-title">Choose a time.</h2></div>
+      <div class="calendar-shell"><div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-30min"></div></div>
+    </section>
+
+    <section class="submission-terms" id="submission-terms" aria-labelledby="submission-terms-title">
+      <h2 id="submission-terms-title">Submission terms &amp; conditions</h2>
+      <p>By submitting this form, you authorize Sun Streak Studios to store and use your company name, contact email, consent record, and basic request metadata to arrange and follow up on this meeting. We retain this information for business communication, recordkeeping, and abuse prevention.</p>
+    </section>
+  </main>
 </body>
 </html>

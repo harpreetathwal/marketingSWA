@@ -41,6 +41,21 @@ test("validates expected form fields", () => {
   assert.deepEqual(Object.keys(invalid.errors).sort(), ["email", "formType", "message", "name"]);
 });
 
+test("requires company, email, and consent for meeting requests", () => {
+  const valid = validatePayload({
+    formType: "meeting",
+    name: "A Booker",
+    company: "Sun Streak Client",
+    email: "client@example.com",
+    termsConsent: "yes"
+  });
+  assert.deepEqual(valid.errors, {});
+  assert.equal(valid.fields.termsConsent, "yes");
+
+  const invalid = validatePayload({ formType: "meeting", company: "", email: "not-an-email" });
+  assert.deepEqual(Object.keys(invalid.errors).sort(), ["company", "email", "name", "termsConsent"]);
+});
+
 test("rejects an origin outside the allowlist", async () => {
   const response = await inquiriesHandler(request("{}", "https://attacker.example"), context);
   assert.equal(response.status, 403);

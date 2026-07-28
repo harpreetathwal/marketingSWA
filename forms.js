@@ -35,6 +35,15 @@
     }
   }
 
+  function revealSection(selector, detail) {
+    if (!selector) return;
+    const revealedSection = document.querySelector(selector);
+    if (!revealedSection || !revealedSection.hidden) return;
+    revealedSection.hidden = false;
+    revealedSection.dispatchEvent(new CustomEvent("inquiry:success", { detail }));
+    revealedSection.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+
   document.querySelectorAll("[data-inquiry-form]").forEach((form) => {
     const status = form.querySelector("[data-form-status]");
     const submitButton = form.querySelector("button[type='submit']");
@@ -70,13 +79,16 @@
 
         form.reset();
         status.classList.add("is-success");
-        status.textContent = `Received. Your reference is ${result.submissionId}. Save this number for follow-up.`;
+        status.textContent = form.dataset.successMessage || `Received. Your reference is ${result.submissionId}. Save this number for follow-up.`;
+
+        revealSection(form.dataset.revealOnSuccess, payload);
       } catch (error) {
         status.classList.add("is-error");
         status.textContent = error.message || "Your inquiry could not be sent. Please try again.";
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = originalLabel;
+        revealSection(form.dataset.revealOnComplete, payload);
       }
     });
   });

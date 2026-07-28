@@ -7,7 +7,7 @@ const { DefaultAzureCredential } = require("@azure/identity");
 
 const MAX_BODY_BYTES = 32 * 1024;
 const DEFAULT_TABLE_NAME = "WebsiteSubmissions";
-const ALLOWED_FORM_TYPES = new Set(["hire", "internship", "collaboration"]);
+const ALLOWED_FORM_TYPES = new Set(["hire", "internship", "collaboration", "meeting"]);
 const FIELD_LIMITS = Object.freeze({
   name: 160,
   email: 320,
@@ -19,6 +19,7 @@ const FIELD_LIMITS = Object.freeze({
   portfolio: 500,
   availability: 160,
   smsConsent: 10,
+  termsConsent: 10,
   message: 5000
 });
 const CLIENT_METADATA_LIMITS = Object.freeze({
@@ -108,12 +109,15 @@ function validatePayload(payload) {
     fields[field] = cleanString(payload[field], limit);
   }
   fields.smsConsent = fields.smsConsent.toLowerCase() === "yes" ? "yes" : "";
+  fields.termsConsent = fields.termsConsent.toLowerCase() === "yes" ? "yes" : "";
 
   if (!fields.name) errors.name = "Your name is required.";
   if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
     errors.email = "Enter a valid email address.";
   }
-  if (!fields.message || fields.message.length < 10) {
+  if (formType === "meeting" && !fields.company) errors.company = "Company name is required.";
+  if (formType === "meeting" && fields.termsConsent !== "yes") errors.termsConsent = "Please accept the submission terms.";
+  if (formType !== "meeting" && (!fields.message || fields.message.length < 10)) {
     errors.message = "Please include at least 10 characters.";
   }
   if (fields.portfolio && !/^https?:\/\//i.test(fields.portfolio)) {

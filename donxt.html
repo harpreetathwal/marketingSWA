@@ -25,25 +25,28 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="image_src" href="https://www.sunstreakstudios.com/assets/social-preview.png?v=20260727">
   <link rel="stylesheet" href="service.css">
+  <script src="site-nav.js" defer></script>
   <script src="service-pages.js" defer></script>
 </head>
-<body>
-  <header class="service-header">
-    <a class="service-wordmark" href="index.html" aria-label="Sun Streak Studios, home"><img src="assets/logo_wide.png" alt=""><strong>Sun Streak Studios</strong></a>
-    <a class="service-back" href="index.html">Back home &nearr;</a>
+<body class="service-page--compact">
+  <header class="site-header universal-nav">
+    <a class="wordmark" href="index.html" aria-label="Sun Streak Studios, home"><span class="brand-mark"><img class="wordmark-mark" src="assets/logo_wide.png" alt=""></span><span class="wordmark-copy"><strong>Sun Streak Studios</strong></span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="donxt.html" aria-current="page">DonXt Ads</a><a href="traditional-advertising.html">Traditional Ads</a><a href="about.html">About</a><a href="contact.html">Contact Us</a></nav>
   </header>
   <main class="service-main">
     <section class="service-hero">
       <div><p class="service-kicker">Video ad series</p><h1>DONXT</h1></div>
     </section>
+    <section class="service-cta service-cta--intro"><p>Ready to explore a DONXT campaign built around your message?</p><a href="contact.html">Let&rsquo;s schedule a call <span aria-hidden="true">&rarr;</span></a></section>
     <section class="service-description" aria-label="About DONXT">
-      <p>DONXT turns a clear “do not do” lesson into a visual story that audiences understand before the final line appears.</p>
-      <p>Each episode uses memorable images, cinematic pacing, and natural-language copy to make a practical message feel impossible to ignore.</p>
-      <p>The repeatable series format gives brands a recognizable campaign platform that can grow across products, audiences, and channels.</p>
+      <p>Every DonXt is a 15–60 second music video without dialogue. It earns attention, anchors visual phrases mnemoicaly, and registers a text based Brand message at the end.</p>
+      <p>Ads interrupt, DonXt(s) entertain. Reward the viewer and make your brand unforgettable. Earn attention and sow a message.</p>
+      <p>Made for the modern attention economy. Tiny films, Big Ideas.</p>
     </section>
     <section class="service-work" aria-labelledby="donxt-work-title" data-carousel>
       <div class="service-work-heading">
-        <div><p class="service-kicker">Selected episodes</p><h2 id="donxt-work-title">See it in motion.</h2></div>
+        <div><p class="service-kicker">Selected episodes</p><h2 id="donxt-work-title">Latest DonXt(s)</h2></div>
         <div class="carousel-controls"><button class="carousel-button" type="button" data-carousel-previous aria-label="Previous three videos">&larr;</button><button class="carousel-button" type="button" data-carousel-next aria-label="Next three videos">&rarr;</button></div>
       </div>
       <div class="video-carousel">
@@ -56,8 +59,8 @@
           <figure class="video-card"><video controls playsinline preload="metadata" src="https://marketingdevwus2stor.blob.core.windows.net/video-content/youtube/DONXT%206.mp4"></video><figcaption>DONXT / 06</figcaption></figure>
         </div>
       </div>
+      <a class="service-gallery-link" href="gallery.html">View all in Gallery <span aria-hidden="true">&rarr;</span></a>
     </section>
-    <section class="service-cta"><p>Ready to explore a DONXT campaign built around your message?</p><a href="hire.html?series=DONXT%20(Video%20Ad%20Series)#hire-form-title">Learn More <span aria-hidden="true">&rarr;</span></a></section>
   </main>
 </body>
 </html>
