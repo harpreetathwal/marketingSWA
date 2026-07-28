@@ -9,6 +9,7 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let revealTimer;
   let loadGuard;
+  let sparkTimer;
   let hasEntered = false;
   let subtitlesStarted = false;
 
@@ -69,6 +70,11 @@
     hasEntered = true;
     window.clearTimeout(revealTimer);
     window.clearTimeout(loadGuard);
+    window.clearTimeout(sparkTimer);
+    document.documentElement.classList.add("brand-spark-active");
+    sparkTimer = window.setTimeout(() => {
+      document.documentElement.classList.remove("brand-spark-active");
+    }, 1000);
     video.pause();
     splash.classList.add("is-exiting");
     landing.setAttribute("aria-hidden", "false");
