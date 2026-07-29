@@ -7,6 +7,10 @@ const { DefaultAzureCredential } = require("@azure/identity");
 
 const MAX_BODY_BYTES = 32 * 1024;
 const DEFAULT_TABLE_NAME = "WebsiteSubmissions";
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://www.sunstreakstudios.com",
+  "https://sunstreakstudios.com"
+];
 const ALLOWED_FORM_TYPES = new Set(["hire", "internship", "collaboration", "meeting"]);
 const FIELD_LIMITS = Object.freeze({
   name: 160,
@@ -32,6 +36,7 @@ const CLIENT_METADATA_LIMITS = Object.freeze({
 });
 
 let tableClient;
+let tableReady;
 
 function jsonResponse(status, body) {
   return {
@@ -49,13 +54,20 @@ function getTableClient() {
   if (tableClient) return tableClient;
 
   const accountName = String(process.env.AZURE_STORAGE_ACCOUNT_NAME || "").trim();
+  const connectionString = String(process.env.SUBMISSIONS_STORAGE_CONNECTION_STRING || "").trim();
   const tableName = String(process.env.SUBMISSIONS_TABLE_NAME || DEFAULT_TABLE_NAME).trim();
 
-  if (!/^[a-z0-9]{3,24}$/.test(accountName)) {
-    throw new Error("AZURE_STORAGE_ACCOUNT_NAME is missing or invalid.");
-  }
   if (!/^[A-Za-z][A-Za-z0-9]{2,62}$/.test(tableName)) {
     throw new Error("SUBMISSIONS_TABLE_NAME is invalid.");
+  }
+
+  if (connectionString) {
+    tableClient = TableClient.fromConnectionString(connectionString, tableName);
+    return tableClient;
+  }
+
+  if (!/^[a-z0-9]{3,24}$/.test(accountName)) {
+    throw new Error("Configure SUBMISSIONS_STORAGE_CONNECTION_STRING or a valid AZURE_STORAGE_ACCOUNT_NAME.");
   }
 
   const credential = new DefaultAzureCredential();
@@ -67,16 +79,28 @@ function getTableClient() {
   return tableClient;
 }
 
+async function getReadyTableClient() {
+  const client = getTableClient();
+  if (!tableReady) {
+    tableReady = client.createTable().catch((error) => {
+      tableReady = undefined;
+      throw error;
+    });
+  }
+  await tableReady;
+  return client;
+}
+
 function cleanString(value, maxLength) {
   if (typeof value !== "string") return "";
   return value.replace(/\u0000/g, "").trim().slice(0, maxLength);
 }
 
 function getAllowedOrigins() {
-  return String(process.env.ALLOWED_ORIGINS || "")
+  return [...DEFAULT_ALLOWED_ORIGINS, ...String(process.env.ALLOWED_ORIGINS || "")
     .split(",")
     .map((origin) => origin.trim().replace(/\/$/, ""))
-    .filter(Boolean);
+    .filter(Boolean)];
 }
 
 function originIsAllowed(request) {
@@ -215,7 +239,8 @@ async function inquiriesHandler(request, context) {
     const entity = buildEntity(request, context, validated);
 
     try {
-      await getTableClient().createEntity(entity);
+      const client = await getReadyTableClient();
+      await client.createEntity(entity);
       context.log("Website inquiry stored", {
         submissionId: entity.rowKey,
         submissionType: entity.submissionType

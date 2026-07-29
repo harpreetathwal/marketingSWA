@@ -61,6 +61,11 @@ test("rejects an origin outside the allowlist", async () => {
   assert.equal(response.status, 403);
 });
 
+test("accepts the production custom domain without extra configuration", async () => {
+  const response = await inquiriesHandler(request("not json", "https://www.sunstreakstudios.com"), context);
+  assert.equal(response.status, 400);
+});
+
 test("rejects invalid JSON", async () => {
   const response = await inquiriesHandler(request("not json"), context);
   assert.equal(response.status, 400);
