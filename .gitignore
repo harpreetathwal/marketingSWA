@@ -3,3 +3,4 @@ api/node_modules/
 api/.func/
 api/*.zip
 npm-debug.log*
+.DS_Store
